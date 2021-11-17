@@ -1,0 +1,65 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode = "push">
+        <mat-toolbar color="primary">
+            <span>Menu</span>
+            <span class="spacer"> </span>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+  
+            </button>
+        </mat-toolbar>|
+         <mat-nav-list>
+                <a  mat-list-item (click)="sidenav.toggle()">
+                    <mat-icon mat-list-icon>label</mat-icon>
+                    <span>Videos</span>
+                </a>
+
+                <a routerLink="/dashboard/listado" mat-list-item (click)="sidenav.toggle()">
+                    <mat-icon mat-list-icon>list</mat-icon>
+                    <span>Listado de videos</span>
+                </a>
+  
+                <a routerLink="/dashboard/agregar" mat-list-item (click)="sidenav.toggle()">
+                    <mat-icon mat-list-icon>add</mat-icon>
+                    <span>Añadir video</span>
+                </a>
+  
+                <a routerLink="/videos/buscar" mat-list-item (click)="sidenav.toggle()">
+                    <mat-icon mat-list-icon>search</mat-icon>
+                    <span>Buscar video</span>
+                </a>
+  
+               
+  
+                <a routerLink="/apuestas/listadoapuestas" mat-list-item (click)="sidenav.toggle()">
+                    <mat-icon mat-list-icon>label</mat-icon>
+                    <span>Listado de apuestas</span>
+                </a>
+  
+                <a routerLink="/apuestas/agregarapuesta" mat-list-item (click)="sidenav.toggle()">
+                    <mat-icon mat-list-icon>add</mat-icon>
+                    <span>Añadir Apuesta</span>
+                </a>
+  
+         </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-toolbar>
+        <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    <span class="spacer">
+        
+    </span>
+        <button mat-button>
+            Logout
+        </button>
+    </mat-toolbar>
+    
+  <div class="container">
+  <!--Se importa el router outlet para que aparezcan las rutas hijas-->
+    <router-outlet></router-outlet>
+  </div>
+   
+  </mat-sidenav-container>
+  

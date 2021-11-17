@@ -1,0 +1,16 @@
+<h1>Listado de videos priueba</h1>
+
+<mat-divider></mat-divider>
+<br>
+
+<div fxLayout="row wrap" fxLayoutAlign="center" fxLayout.xs="column" fxLayoutGap="20px">
+
+    <div fxFlex="20" fxFlex.lg="15" fxFlex.sm="30" *ngFor="let video of videos">
+        <ul>
+            <li>{{video.titulo}}</li>
+        </ul>
+
+        <app-video-tarjeta [video]="video"></app-video-tarjeta> 
+
+    </div>
+</div>
