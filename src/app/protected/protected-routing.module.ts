@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ListadoComponent } from './videos/pages/listado/listado.component';
 import { AgregarComponent } from './videos/pages/agregar/agregar.component';
 import { VideoComponent } from './videos/pages/video/video.component';
+import { AgregarApuestaComponent } from './apuestas/pages/agregar-apuesta/agregar-apuesta.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
 
       {path: 'listado',component: ListadoComponent},
       {path: 'agregar',component: AgregarComponent},
+      {path: 'agregarapuesta',component: AgregarApuestaComponent},
       { path: ':id',component: VideoComponent},
       {path: 'editar/:id',component: AgregarComponent},
       

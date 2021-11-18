@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SafeurlPipe } from './videos/pipe/safeurl.pipe';
 import { ListadoComponent } from './videos/pages/listado/listado.component';
 import { VideoComponent } from './videos/pages/video/video.component';
+import { AgregarApuestaComponent } from './apuestas/pages/agregar-apuesta/agregar-apuesta.component';
+
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { VideoComponent } from './videos/pages/video/video.component';
     SafeurlPipe,
     ListadoComponent,
     VideoTarjetaComponent,
-    VideoComponent
+    VideoComponent,
+    AgregarApuestaComponent,
+    
 
    
   ],

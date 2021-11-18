@@ -1,0 +1,80 @@
+<div class="container">
+    <h3>Agregar Apuesta</h3>
+
+    
+    <hr>
+    
+    <div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column">
+      
+      <div fxFlex="50" fxLayout="column">
+         <mat-form-field appearance="fill">
+          <mat-label>Seleccione video</mat-label>
+          <mat-select [(ngModel)]="video.id">
+            <mat-option *ngFor="let video of videos" [value]="video.id">
+              {{video.titulo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <h1>el video seleccionado es: {{video.id}}</h1>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Activar Apuesta</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let activo of activos" [value]="video.activo">
+              {{activo.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      
+        <mat-form-field>
+        <mat-label> Fecha y Hora de la apuesta</mat-label>
+      
+        <input matInput type="text" put [(ngModel)]="apuestaVideo.fechahoraapuesta" 
+        type="datetime-local" id="datetime"    class="form-select mb-3"   >
+  
+        <script type="text/javascript">
+          $("#datetime").datetimepicker({
+              format: 'L("yyyy-mm-dd, HH:MM")' // 'yyyy-mm-dd hh:ii' 
+          } );
+          </script>
+        
+      </mat-form-field>
+       
+    
+
+       
+
+       
+
+        <mat-form-field>
+          <mat-label> Precio "Vistas"</mat-label>
+          <input matInput type="text" [(ngModel)]="apuestaVideo.preciov" placeholder="">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label> Precio "Me gusta"</mat-label>
+          <input matInput type="text" [(ngModel)]="apuestaVideo.preciol" placeholder="">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label> Precio "No me gusta"</mat-label>
+          <input matInput type="text" [(ngModel)]="apuestaVideo.preciod" placeholder="">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label> Precio "Comentario"</mat-label>
+          <input matInput type="text" [(ngModel)]="apuestaVideo.precioc" placeholder="">
+        </mat-form-field>
+
+<br>
+        <button mat-raised-button color="warn" (click)="guardarApuesta()">
+          <mat-icon>edit</mat-icon>
+          Guardar
+        </button>
+      </div>
+
+      
+     
+   </div>
+  <!--  -->
