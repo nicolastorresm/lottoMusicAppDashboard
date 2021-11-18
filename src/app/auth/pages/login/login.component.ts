@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/usuarios/usuario';
+import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -29,35 +30,33 @@ export class LoginComponent {
  
      login():void{
       console.log(this.miFormulario.value) 
-    
       this.usuario = this.miFormulario.value;
       console.log('email',this.usuario.email) 
       console.log('pass',this.usuario.password) 
       
       if (this.usuario.email== null || this.usuario.password == null){
-        console.log ('error login',this.usuario)
+        console.log ('Error Login','Email o contraseña vacías!','error!')
         return;
       }
     
       this.authService.login(this.usuario)
       .subscribe( resp =>{
-        console.log(resp)
-    
-        //  se uysa ebn la clase servixce, decodifica y luiego se convieerte a jsono let payload = JSON.parse (atob((resp.token.split(".")[1])))
-        //console.log(payload)
-    
-        // guardar dos datos, para mantener la sesion
-    
-       // this.authService.guardarUsuario( resp.token)
-       
-       
-       //this.authService.guardarToken(resp.token)
-    
-      // let usuario = this.authService.usuario
-    
+        console.log(resp)   
+        // // formatear el token https://jwt.io/ y tomar el indice 1 = PAYLOAD:DATA
+       // console.log(resp.token.split(".")[1])
+      
+       //decoficar el string q esta en base 64 y encriptado y convertirlo en datos q nos interesa  con atob
+     
+        //   console.log(atob(resp.token.split(".")[1]))
+        
+        //parsearlo y convertirlo a un json
+        let payload = JSON.parse(atob(resp.token.split(".")[1]))
+        console.log(payload)
+
         this.router.navigateByUrl('/dashboard')
+        Swal.fire('Login',`Hola ${payload.sub}, Has iniciado sesion con exito....`,'success')
     
-        console.log ('Login', `Hola ${resp.user.username}, Has iniciado sesion con exito` )
+       // console.log ('Login', `Hola ${resp.user.username}, Has iniciado sesion con exito` )
     //    console.log ('0objet', `Hola ${usuario.email}, Has iniciado sesion con exito....` )
       }, err => {
           if (err.status == 401){

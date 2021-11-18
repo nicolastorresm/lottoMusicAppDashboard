@@ -3,11 +3,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Usuario } from 'src/app/usuarios/usuario';
 import { environment } from 'src/environments/environment';
+import { IUsuario } from '../interfaces/IUsuario';
+import{map} from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private iusuario:IUsuario
+
 
   private baseUrl: string = environment.baseUrl
 
@@ -26,8 +31,17 @@ export class AuthService {
     params.set('password', usuario.password)
     console.log(params.toString())
 
-    return this._http.post<any>(urlEndpoint,params.toString(),{headers: httpHeaders}) 
+    return this._http.post<any>(urlEndpoint,params.toString(),{headers: httpHeaders})
+    
+ 
+  }
 
+  loginUsuario (email: string, password:string){
+    const urlEndpoint = `${this.baseUrl}/login`
+  }
+
+  get usuario(){
+    return {...this.iusuario};
   }
 }
 
