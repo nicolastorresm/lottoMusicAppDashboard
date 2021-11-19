@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/usuarios/usuario';
@@ -11,7 +11,14 @@ import { AuthService } from '../../services/auth.service';
   styles: [
   ]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+
+  ngOnInit(){
+    if(this.authService.isAuthenticated()){
+      Swal.fire('Login', `Hola ${this.authService.usuario.email}  ya estas autenticado`,'info')
+      this.router.navigate(['/dashboard'])
+    }
+  }
 
   usuario : Usuario
 
@@ -66,7 +73,7 @@ export class LoginComponent {
     //    console.log ('0objet', `Hola ${usuario.email}, Has iniciado sesion con exito....` )
       }, err => {
           if (err.status == 401){
-            console.log('usuario o clave incorrecta') 
+            Swal.fire('Error Login',` Usuario o Contraseña Incorrecta!`,'error')
           }
     
       } )

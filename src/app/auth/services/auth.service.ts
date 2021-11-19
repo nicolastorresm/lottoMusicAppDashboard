@@ -39,7 +39,7 @@ export class AuthService {
   public get token():string{
     if (this._token != null){
       return this._token
-    }else if (this.token == null && sessionStorage.getItem('usuario') != null ){
+    }else if (this._token == null && sessionStorage.getItem('token') != null ){
 
     this._token =  sessionStorage.getItem('token')
     return this._token
@@ -74,8 +74,6 @@ export class AuthService {
     this._usuario = new Usuario();
     this._usuario.email = payload.sub;
     sessionStorage.setItem('usuario',JSON.stringify(this._usuario)) //pase convierte string a JSON, stringify convierte un objeto a string o texto
-
-
   }
 
   guardarToken(accessToken: string ):void{
@@ -91,6 +89,23 @@ export class AuthService {
     }
     return null;
 
+  }
+//verificar si el usuario ya ha iniciado sesion
+  isAuthenticated():boolean{
+    let payload = this.obtenerDatosToken(this.token);// desde el metodo tojen get
+    if (payload != null && payload.sub && payload.sub.length>0){
+      return true
+    }
+    return false;
+  }
+
+  logout():void{
+    this._usuario= null;
+    this._token = null
+    sessionStorage.clear();
+
+    sessionStorage.removeItem('usuario')
+    sessionStorage.removeItem('token')
   }
 }
 
