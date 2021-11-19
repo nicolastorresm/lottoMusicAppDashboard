@@ -50,11 +50,17 @@ export class LoginComponent {
         //   console.log(atob(resp.token.split(".")[1]))
         
         //parsearlo y convertirlo a un json
-        let payload = JSON.parse(atob(resp.token.split(".")[1]))
-        console.log(payload)
+      //  let payload = JSON.parse(atob(resp.token.split(".")[1]))
+      
+
+        this.authService.guardarUsuario(resp.token);
+        this.authService.guardarToken(resp.token);
+
+        //invocamos el getter usuario, se utiliza como si fuera un atributo getUsuarop
+        let usuario = this.authService.usuario
 
         this.router.navigateByUrl('/dashboard')
-        Swal.fire('Login',`Hola ${payload.sub}, Has iniciado sesion con exito....`,'success')
+        Swal.fire('Login',`Hola ${usuario.email}, Has iniciado sesion con exito....`,'success')
     
        // console.log ('Login', `Hola ${resp.user.username}, Has iniciado sesion con exito` )
     //    console.log ('0objet', `Hola ${usuario.email}, Has iniciado sesion con exito....` )
