@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import ('./protected/protected.module').then(m => m.ProtectedModule)
   },
   {
+    path: 'forgot-password',
+    loadChildren: () => import ('./auth/forgot-password/forgot-password.module').then(m => m.ForgotPasswordModule)
+  },
+  {
     path: '**',
     redirectTo: 'auth'
   }

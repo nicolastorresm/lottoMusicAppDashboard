@@ -6,6 +6,7 @@ import { ApuestaService } from '../../services/apuesta.service';
 import { VideosService } from '../../../videos/services/videos.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 interface Activos {
@@ -57,7 +58,8 @@ export class AgregarApuestaComponent implements OnInit {
   constructor(private _httpApuesta:ApuestaService,
     private _httpVideo: VideosService,
    private router:Router,
-   private snackBar: MatSnackBar) { }
+   private snackBar: MatSnackBar,
+   private fb:FormBuilder) { }
  
 
   ngOnInit(): void {
@@ -77,43 +79,60 @@ export class AgregarApuestaComponent implements OnInit {
 
   }
 
+
+  miFormulario: FormGroup = this.fb.group({
+    id:['',[Validators.required]],
+    preciov:  ['',[Validators.required, Validators.minLength(0)]],
+    preciol:  ['',[Validators.required, Validators.minLength(0)]],
+    preciod:  ['',[Validators.required, Validators.minLength(0)]],
+    precioc:  ['',[Validators.required, Validators.minLength(0)]],
+    activo:  ['',[Validators.required, Validators.minLength(2)]],
+    fechahoraapuesta:  ['',[Validators.required]]
+   })
+
   guardarApuesta(){
-
-    console.log("Entradmos en guardar apuesta")
-    this._httpVideo.getVideosPorId(this.video.id).subscribe((resp:any)=>{
-      this.videos=resp.items;
-      console.log("recibimos video.id" + this.video.id)
-      console.log(resp)
-
-      this.apuestaVideo.video = resp
-
-      console.log("Ahora el valor de apuestavideoid es " +this.apuestaVideo.video)
-      console.log("estamos en componente guardarApuesta")
-      console.log("el valor de activo es  ", this.apuestaVideo.activo)
-      console.log("el valor de fechahoraapuesta es  ", this.apuestaVideo.fechahoraapuesta)
-      console.log("el valor de precioc es  ", this.apuestaVideo.precioc)
-      console.log("el valor de preciov es  ", this.apuestaVideo.preciov)
-      console.log("el valor de preciol es  ", this.apuestaVideo.preciol)
-      console.log("el valor de preciod es  ", this.apuestaVideo.preciod)
-      console.log("el valor de id desde videoID es  ", this.apuestaVideo.video.id)
-      console.log("el valor de id desde fecha apuesta es  ",this.apuestaVideo.fechahoraapuesta)
-      this.apuestaVideo.fechahoraapuesta= this.formatearFecha(this.apuestaVideo.fechahoraapuesta)
-     console.log("el valor de id desde fechahoraapuesta formateado es   ",  this.apuestaVideo.fechahoraapuesta)
-     
-     
-     
-      /* if (this.apuestaVideo.id.trim().length === 0 ){
+    if (this.miFormulario.invalid){
+      this.miFormulario.markAllAsTouched()
       return;
-    } */
-    this._httpApuesta.agregarVideoApuesta(this.apuestaVideo)
-    .subscribe( resp =>console.log("datos recibidos",resp))
-      
-      //this.mostrarSnackBar('Apuesta Guardada'))
-    //subscribe( resp =>this.mostrarSnackBar('Apuesta guardado con exito!'));
-  
-    
-    });
+    }
 
+    
+    
+    let fechaApuesta:string = this.miFormulario.value.fechahoraapuesta
+
+
+
+    let precioViews = this.miFormulario.value.preciov
+    let precioLike= this.miFormulario.value.preciol
+    let precioDislike = this.miFormulario.value.preciod
+    let precioComents = this.miFormulario.value.precioc
+    let videoActivo = this.miFormulario.value.activo
+
+    this._httpVideo.getVideosPorId(this.miFormulario.value.id).subscribe((resp:any)=>{
+      this.videos=resp.items;
+      
+      //mapeamos los valores
+      this.apuestaVideo.video = resp //id
+      this.apuestaVideo.preciov = precioViews;
+      this.apuestaVideo.preciol = precioLike;
+      this.apuestaVideo.preciod = precioDislike;
+      this.apuestaVideo.precioc = precioComents;
+      this.apuestaVideo.activo = precioViews;
+      this.apuestaVideo.fechahoraapuesta = this.formatearFecha( fechaApuesta)
+
+      this._httpApuesta.agregarVideoApuesta(this.apuestaVideo)
+      .subscribe( resp =>console.log("datos recibidos",resp))
+    
+      console.log("Entradmos en guardar apuesta" ,this.apuestaVideo.video, precioViews,precioLike,precioDislike,precioComents,videoActivo)
+     
+
+
+              });
+
+
+    
+
+    this.miFormulario.reset()
   }
 
   
@@ -139,4 +158,8 @@ export class AgregarApuestaComponent implements OnInit {
       });
     }
 
+    elCampoNoEsValido( campo: string){
+      return this.miFormulario.controls[campo].errors && 
+      this.miFormulario.controls[campo].touched
+    }
 }

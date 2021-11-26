@@ -15,13 +15,8 @@ export class AuthService {
  private _usuario: Usuario;
  private _token: string;
 
-
   private iusuario:IUsuario
-
-
   private baseUrl: string = environment.baseUrl
-
-
 
   constructor(private _http : HttpClient) { }
 
@@ -106,6 +101,14 @@ export class AuthService {
 
     sessionStorage.removeItem('usuario')
     sessionStorage.removeItem('token')
+  }
+
+  resetPassword(email: string): void{
+try {
+  console.log(email)
+} catch (error) {
+  console.log(error)
+}
   }
 }
 

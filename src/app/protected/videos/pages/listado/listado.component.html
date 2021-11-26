@@ -1,3 +1,57 @@
+<div class="row" >
+    <div class="col-12">
+
+        <div class="row">
+            <div class="col-12">
+                Lista de videos
+            </div>
+        </div>
+
+
+
+<ng-container *ngIf="videos.length > 0">
+
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4 " *ngFor="let video of videos">
+        <div class="card h-100">
+
+            <iframe width="100%" height="250px" [src]="video.idVideo | safeurl" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    
+            <div class="card-body">
+                <h4 class="card-title">{{video.titulo}}</h4>
+                <p class="card-text">{{video.artista}}</p>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="btn btn-block btn-primary text-light" role="button" [routerLink]="['/dashboard', video.id]"> detalles</div>
+                    </div>
+
+                    <div class="col-auto">
+                        <div class="btn btn-block btn-danger text-light" role="button" [routerLink]="['/dashboard/editar',video.id]"> Editar</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+</ng-container>
+
+<ng-container *ngIf="videos.length === 0">
+    <div class="row">
+        <div class="col-12">
+            <p>No hay videos disponibles</p>
+        </div>
+    </div>
+</ng-container>
+</div>
+</div>
+
+<!-- 
+
 <h1>Listado de videos priueba</h1>
 
 <mat-divider></mat-divider>
@@ -13,4 +67,4 @@
         <app-video-tarjeta [video]="video"></app-video-tarjeta> 
 
     </div>
-</div>
+</div> -->

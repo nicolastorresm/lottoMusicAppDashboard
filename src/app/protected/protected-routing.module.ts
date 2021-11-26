@@ -5,14 +5,15 @@ import { ListadoComponent } from './videos/pages/listado/listado.component';
 import { AgregarComponent } from './videos/pages/agregar/agregar.component';
 import { VideoComponent } from './videos/pages/video/video.component';
 import { AgregarApuestaComponent } from './apuestas/pages/agregar-apuesta/agregar-apuesta.component';
-import { AuthGuard } from './videos/guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
+
+
 
 const routes: Routes = [
   {
     path:'',
     component:DashboardComponent,
     children:[
-
       {path: 'listado',component: ListadoComponent,canActivate:[AuthGuard]},
       {path: 'agregar',component: AgregarComponent, canActivate:[AuthGuard]},
       {path: 'agregarapuesta',component: AgregarApuestaComponent, canActivate:[AuthGuard]},

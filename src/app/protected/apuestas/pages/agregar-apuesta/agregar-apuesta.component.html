@@ -1,80 +1,126 @@
-<div class="container">
-    <h3>Agregar Apuesta</h3>
+<div class="mt-2">
+  <h2>Agregar Apuestas</h2>
+</div>
 
-    
-    <hr>
-    
-    <div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column">
-      
-      <div fxFlex="50" fxLayout="column">
-         <mat-form-field appearance="fill">
-          <mat-label>Seleccione video</mat-label>
-          <mat-select [(ngModel)]="video.id">
-            <mat-option *ngFor="let video of videos" [value]="video.id">
-              {{video.titulo}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <h1>el video seleccionado es: {{video.id}}</h1>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Activar Apuesta</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let activo of activos" [value]="video.activo">
-              {{activo.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
 
-      
-        <mat-form-field>
-        <mat-label> Fecha y Hora de la apuesta</mat-label>
-      
-        <input matInput type="text" put [(ngModel)]="apuestaVideo.fechahoraapuesta" 
-        type="datetime-local" id="datetime"    class="form-select mb-3"   >
+<div class="container mt-5">
+
+
+  <form  autocomplete="off"
+[formGroup] = 'miFormulario'
+(ngSubmit)="guardarApuesta()">
+
+<div class="mb-3" >
+  <select   class="form-control" 
+  formControlName="id" >
+  <option value="">Seleccione video</option>
+    <option   *ngFor="let video of videos" 
+    [value]="video.id | number">{{video.titulo}}</option>
+       </select>
+ </div>
+
+ 
+ 
+
+ <div class="mb-3">
+  <label for="preciov" class="form-label">Precio Vistas</label>
+  <input  formControlName="preciov" type="number" class="form-control" id="exampleInputEmail1" >
+  <span class="form-text text-danger"
+  *ngIf="elCampoNoEsValido('preciov')">Debe der igual o mayor que 0</span>
+  </div>
+
+
+<div class="mb-3">
   
-        <script type="text/javascript">
-          $("#datetime").datetimepicker({
-              format: 'L("yyyy-mm-dd, HH:MM")' // 'yyyy-mm-dd hh:ii' 
-          } );
-          </script>
-        
-      </mat-form-field>
-       
-    
+  <label for="preciol" class="form-label">Precio Like</label>
+  <input  formControlName="preciol" type="number" class="form-control" id="exampleInputEmail1" >
+  <span class="form-text text-danger"
+  *ngIf="elCampoNoEsValido('preciol')">Debe der igual o mayor que 0</span>
+</div>
 
-       
 
-       
+<div class="mb-3">
+  
+  <label for="preciod" class="form-label">Precio Dislike</label>
+  <input  formControlName="preciod" type="number" class="form-control" id="exampleInputEmail1" >
+  <span class="form-text text-danger"
+  *ngIf="elCampoNoEsValido('preciod')">Debe der igual o mayor que 0</span>
+ 
+</div>
 
-        <mat-form-field>
-          <mat-label> Precio "Vistas"</mat-label>
-          <input matInput type="text" [(ngModel)]="apuestaVideo.preciov" placeholder="">
-        </mat-form-field>
 
-        <mat-form-field>
-          <mat-label> Precio "Me gusta"</mat-label>
-          <input matInput type="text" [(ngModel)]="apuestaVideo.preciol" placeholder="">
-        </mat-form-field>
+<div class="mb-3">
+  <label for="precioc" class="form-label">Precio Comentario</label>
+  <input  formControlName="precioc" type="number" class="form-control" id="exampleInputEmail1" >
+  <span class="form-text text-danger"
+  *ngIf="elCampoNoEsValido('precioc')">Debe der igual o mayor que 0</span>
+</div>
 
-        <mat-form-field>
-          <mat-label> Precio "No me gusta"</mat-label>
-          <input matInput type="text" [(ngModel)]="apuestaVideo.preciod" placeholder="">
-        </mat-form-field>
+<div class="mb-3">
+  <label  class="form-label">Activar Apuesta</label>
+  <select formControlName="activo" class="form-select" aria-label="Default select example" >
+    <option [value]="video.activo" *ngFor="let activo of activos" selected > 
+       {{activo.viewValue}}</option></select>
+       <span class="form-text text-danger"
+  *ngIf="elCampoNoEsValido('activo')">Seleccione una opcion valida</span>
+</div>
 
-        <mat-form-field>
-          <mat-label> Precio "Comentario"</mat-label>
-          <input matInput type="text" [(ngModel)]="apuestaVideo.precioc" placeholder="">
-        </mat-form-field>
+<div class="mb-3">
+  <label  class="form-label">Fecha Apuesta</label>
+  <input matInput type="text" put formControlName="fechahoraapuesta" 
+  type="datetime-local" id="datetime"    class="form-select mb-3"   >
+  
 
-<br>
-        <button mat-raised-button color="warn" (click)="guardarApuesta()">
-          <mat-icon>edit</mat-icon>
-          Guardar
-        </button>
-      </div>
+  <script type="text/javascript">
+    $("#datetime").datetimepicker({
+        format: 'L("yyyy-mm-dd, HH:MM")' // 'yyyy-mm-dd hh:ii' 
+    } );
+    </script>
 
-      
-     
-   </div>
-  <!--  -->
+<span class="form-text text-danger"
+*ngIf="elCampoNoEsValido('fechahoraapuesta')">Seleccione una fecha correcta</span>
+</div>
+
+<div>
+  <button type="submit" class="btn btn-primary" [disabled]>Guardar</button>
+</div>
+
+
+</form>
+  
+
+  
+
+
+
+
+</div>
+
+
+<span>Valid</span>
+      <pre>{{ miFormulario.valid }}</pre>
+
+      <span>Value</span>
+      <pre>{{ miFormulario.value | json }}</pre>
+<!-- 
+<div class="row">
+  <div class="col">
+
+      <span>Valid</span>
+      <pre>{{ miFormulario.valid }}</pre>
+
+      <span>Pristine</span>
+      <pre>{{ miFormulario.pristine }}</pre>
+
+      <span>Touched</span>
+      <pre>{{ miFormulario.touched }}</pre>
+
+      <span>Value</span>
+      <pre>{{ miFormulario.value | json }}</pre>
+
+      <span>Precio</span>
+      <pre>{{ miFormulario.controls.precio.errors | json }}</pre>
+  </div>
+</div>
+ -->

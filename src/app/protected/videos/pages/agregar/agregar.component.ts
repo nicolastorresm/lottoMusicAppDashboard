@@ -99,9 +99,11 @@ export class AgregarComponent implements OnInit {
   if ( this.videosService.getVideosPorIdVideo (idVideo)) {
     alert ("video ya existe")
   }
-       this._youtube.getVideoYoutubeForId(idVideo)
+       this._youtube.obtenerVideosDetalles(idVideo)
 	   .subscribe((resp: any) => {
       this.videos = resp.items;
+
+      console.log(this.videos)
         
        
     });

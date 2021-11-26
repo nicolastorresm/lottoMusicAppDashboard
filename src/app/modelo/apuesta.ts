@@ -1,6 +1,5 @@
-import { Mvideo } from '../../../modelo/video';
-export interface IApuesta {
-    
+import { Mvideo } from './video';
+export class Mapuesta{
     activo              :boolean;
     fechahoraapuesta    :string;
     precioc             :number;
@@ -8,4 +7,5 @@ export interface IApuesta {
     preciol             :number;
     preciov             :number;
     video               :Mvideo;
-} 
+}
+

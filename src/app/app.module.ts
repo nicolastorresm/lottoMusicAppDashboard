@@ -1,4 +1,4 @@
-import { VideoTarjetaComponent } from './protected/videos/video-tarjeta/video-tarjeta.component';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,8 +11,9 @@ import { MainComponent } from './auth/pages/main/main.component';
 import { DashboardComponent } from './protected/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { ListadoComponent } from './protected/videos/pages/listado/listado.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     LoginComponent,
     MainComponent,
-    DashboardComponent
+    DashboardComponent,
+ 
    
   ],
   imports: [

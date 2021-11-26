@@ -10,6 +10,9 @@ import { SafeurlPipe } from './videos/pipe/safeurl.pipe';
 import { ListadoComponent } from './videos/pages/listado/listado.component';
 import { VideoComponent } from './videos/pages/video/video.component';
 import { AgregarApuestaComponent } from './apuestas/pages/agregar-apuesta/agregar-apuesta.component';
+import { ForgotPasswordComponent } from '../auth/forgot-password/forgot-password.component';
+
+
 
 
 
@@ -21,9 +24,8 @@ import { AgregarApuestaComponent } from './apuestas/pages/agregar-apuesta/agrega
     VideoTarjetaComponent,
     VideoComponent,
     AgregarApuestaComponent,
-    
-
-   
+    ForgotPasswordComponent,
+      
   ],
   imports: [
     CommonModule,
