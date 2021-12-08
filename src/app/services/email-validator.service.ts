@@ -21,6 +21,7 @@ const email = control.value;
 console.log(email)
     return this.httpCliente.get<any[]>(`${this.baseUrl}/usuarios/email/${email}`)
     .pipe(
+      delay(3000),
       map(resp => {
         return (resp.length === 0) //si no regresa nada al consultar el email, se puede ocupar
           ? null

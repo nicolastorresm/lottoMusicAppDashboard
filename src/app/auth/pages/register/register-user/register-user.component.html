@@ -1,142 +1,136 @@
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><script type="text/javascript">
-    $('#datepicker').datepicker({
-        weekStart: 1,
-        daysOfWeekHighlighted: "6,0",
-        autoclose: true,
-        todayHighlight: true,
-    });
-    $('#datepicker').datepicker("setDate", new Date());
-</script>
+<style>
+    .bg {
+        background-image: url(assets/images/guitarlotto.jpeg);
+        background-position: center center;
+        /*  background-repeat: no-repeat; */
+    }
+</style>
 
-<form  autocomplete="off"
-[formGroup] = 'miFormulario'
-(ngSubmit)="crearNuevoUsuario()">
+<div class="container bg-black w-75 mt-5 rounded shadow">
+    <div class="row align-items-stretch">
+        <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
 
-    <div class="mb-4">
-        <label class="form-label">Nombre</label>
-        <input type="text" 
-        class="form-control" 
-        formControlName="nombre"
-        placeholder="Nombre del usuario"
-        >
-        <span class="form-text text-danger"
-        *ngIf="campoNoValido('nombre')">
-        Debe ser un nombre valido</span>
+        </div>
+        <div class="col bg-white p-5 rounded-end">
+            <div class="text-end">
+                <img src="assets/images/logo.jpeg" width="200" alt="">
+            </div>
+            <h2 class=" text-center py-5">Nuevo Usuario Admin</h2>
+
+            <form autocomplete="off" [formGroup]='miFormulario' (ngSubmit)="crearNuevoUsuario()">
+
+                <div class="mb-4">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre del usuario">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('nombre')">
+                        Debe ser un nombre valido</span>
+                </div>
+
+
+
+
+                <div class="mb-4">
+                    <label class="form-label">Apellido Paterno</label>
+                    <input type="apellidop" class="form-control" formControlName="apellidop"
+                        placeholder="Apellido Paterno">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('apellidop')"> Debe ser un Apellido valido</span>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Apellido materno</label>
+                    <input type="apellidom" class="form-control" formControlName="apellidom"
+                        placeholder="Apellido materno">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('apellidom')"> Debe ser un Apellido valido</span>
+                </div>
+
+                
+
+                <div class="mb-4">
+                    <label class="form-label ">Fecha de nacimiento</label>
+
+                    <input formControlName="fechaNacimiento"  type="date" 
+                        class="form-select mb-3" >
+
+                    <!-- <script type="text/javascript">
+                        $("#datetime").datepicker({
+                            format: 'L("yyyy-mm-dd")' // 'yyyy-mm-dd hh:ii' 
+                        });
+                    </script> -->
+                    <span class="form-text text-danger" *ngIf="campoNoValido('fechaNacimiento')"> Debe ser una fecha valida</span>
+                </div>
+
+
+
+
+
+
+                <div class="mb-4">
+                    <label class="form-label">Numero de telefono</label>
+                    <input type="text" class="form-control" formControlName="telefono" placeholder="Numero de telefono">
+                    <!-- <span class="form-text text-danger" > Debe ser un telefono valido</span> -->
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Correo electronico</label>
+                    <input type="email" class="form-control" formControlName="email" placeholder="ejemplo@gmail.com">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('email')"> {{emailErrorMsg}}</span>
+
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" formControlName="password" placeholder="Contraseña">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('password')"> La contraseña debe ser mayor
+                        de 6 caracteres</span>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">confirma tu Contraseña</label>
+                    <input type="password" class="form-control" formControlName="password2" placeholder="Contraseña">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('password2')"> las contraseñas deben ser
+                        iguales</span>
+                </div>
+
+
+                <div class="row" type="submit">
+                    <button class="btn btn-primary float-end" > Registro </button>
+                </div>
+
+                <div class="my-3">
+                    <span>¿ ya tienes una cuenta? <a routerLink='/auth/login' href="#">Ingresa aqui</a></span><br>
+
+                </div>
+
+
+
+            </form>
+
+
+        </div>
     </div>
-   
-          
-   
-
-    <div class="mb-4">
-        <label class="form-label">Apellido Paterno</label>
-        <input type="apellidop" 
-        class="form-control" 
-        formControlName="apellidop"
-        placeholder="Apellido Paterno"
-        >
-        <span class="form-text text-danger"> Debe ser un Apellido valido</span>
-    </div>
-    <div class="mb-4">
-        <label class="form-label">Apellido materno</label>
-        <input type="apellidom" 
-        class="form-control" 
-        formControlName="apellidom"
-        placeholder="Apellido materno"
-        >
-        <span class="form-text text-danger"> Debe ser un Apellido valido</span>
-    </div>
-
-    
-    <div class="mb-4">
-        <label  class="form-label ">Fecha de nacimiento</label>
-      
-        <input formControlName="fechaNacimiento" matInput type="text"         
-        type="datetime-local" id="datetime"    
-        class="form-select mb-3">
-  
-        <script type="text/javascript">
-          $("#datetime").datepicker({
-              format: 'L("yyyy-mm-dd")' // 'yyyy-mm-dd hh:ii' 
-          } );
-          </script>
-       <span class="form-text text-danger"> Debe ser una fecha valida</span>
-    </div>
+</div>
 
 
+<div class="row">
+    <div class="col">
 
-  
-
-
-    <div class="mb-4">
-        <label class="form-label">Numero de telefono</label>
-        <input type="text" 
-        class="form-control" 
-        formControlName="telefono"
-        placeholder="Numero de telefono"
-        >
-        <span class="form-text text-danger"> Debe ser un telefono valido</span>
-    </div>
-
-    <div class="mb-4">
-        <label  class="form-label">Correo electronico</label>
-        <input type="email" 
-        class="form-control" 
-        formControlName="email"
-        placeholder="ejemplo@gmail.com"
         
-        >
-        <span   class="form-text text-danger"
-        *ngIf="campoNoValido('email')"> {{emailErrorMsg}}</span>
-       
+
+<span>Valid</span>
+
+        <pre>{{ miFormulario.valid }}</pre>
+
+        <span>Pristine</span>
+        <pre>{{ miFormulario.pristine }}</pre>
+
+        <span>Touched</span>
+        <pre>{{ miFormulario.touched }}</pre>
+
+        <span>Value</span>
+        <pre>{{ miFormulario.value | json }}</pre>
+
+        <span>CustomDirective</span>
+        <pre>{{ miFormulario.controls.existencias?.errors | json }}</pre>
+
     </div>
+</div>
 
-    <div class="mb-4">
-        <label class="form-label">Contraseña</label>
-        <input type="password" 
-        class="form-control"
-        formControlName="password" 
-        placeholder="Contraseña" >
-        <span class="form-text text-danger"  *ngIf="campoNoValido('password')"> La contraseña debe ser mayor de 6 caracteres</span>
-    </div>
-
-    <div class="mb-4">
-        <label class="form-label">confirma tu Contraseña</label>
-        <input type="password" 
-        class="form-control"
-        formControlName="password2" 
-        placeholder="Contraseña" >
-        <span class="form-text text-danger"   *ngIf="campoNoValido('password2')"> las contraseñas deben ser iguales</span>
-    </div>
-
-
-    <div class="row" type="submit">
-        <button  class="btn btn-primary float-end"
-        [disabled]="miFormulario.pending"
-       > Registro     </button>
-    </div>
-
-    <div class="my-3">
-        <span>¿ ya tienes una cuenta? <a routerLink='/auth/login' href="#">Ingresa aqui</a></span><br>
-      
-    </div>
-
-</form>
-<span>Form valid: {{miFormulario.valid | json}}</span>
-<span>Form status: {{miFormulario.status | json}}</span>
-<span>Form pending: {{miFormulario.pending | json}}</span>
-
-
-<span>Form errors: {{miFormulario.errors | json}}</span>
-
-
-  <h5>nombre</h5>
- <pre>{{miFormulario.controls.nombre.errors | json}}</pre>
-
- <h5>email</h5>
- <pre>{{miFormulario.controls.email.errors | json}}</pre> 
-
- <h5>pasword</h5>
- <pre>{{miFormulario.controls.password.errors | json}}</pre>
-
- <h5>confirmar</h5>
- <pre>{{miFormulario.controls.password2.errors | json}}</pre>

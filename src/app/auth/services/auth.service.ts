@@ -110,5 +110,12 @@ try {
   console.log(error)
 }
   }
+
+
+  agregarUsuario(usuario:IUsuario){
+    return this._http.post<IUsuario>(`${this.baseUrl}/usuarios`,usuario)
+
+  }
+  
 }
 

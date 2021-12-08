@@ -70,6 +70,10 @@ export class AgregarApuestaComponent implements OnInit {
 
      
       this.videos = data })
+
+      this.miFormulario.reset({
+        
+      })
   }
 
 
@@ -133,6 +137,14 @@ export class AgregarApuestaComponent implements OnInit {
     
 
     this.miFormulario.reset()
+
+     
+    
+      //this.router.navigate('/dashboard/agregarapuesta')
+    
+
+    
+
   }
 
   
